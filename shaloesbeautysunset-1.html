@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shaloe's Beauty Sunset</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose: #c8687a;
+      --gold: #d4a24c;
+      --blush: #f2d2d8;
+      --deep: #1a0a0e;
+      --warm: #2d1218;
+      --cream: #fdf5f0;
+      --muted: #9b7a82;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--deep);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 18px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(26,10,14,0.95), transparent);
+      backdrop-filter: blur(4px);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; letter-spacing: 0.05em;
+      color: var(--gold);
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--blush); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid; place-items: center;
+      position: relative; overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, #3a1220 0%, var(--deep) 70%);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 70%, rgba(200,104,122,0.18) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(212,162,76,0.12) 0%, transparent 50%);
+    }
+    .floating-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: drift 8s ease-in-out infinite alternate;
+    }
+    .orb1 { width: 400px; height: 400px; background: rgba(200,104,122,0.15); top: -100px; right: -100px; }
+    .orb2 { width: 300px; height: 300px; background: rgba(212,162,76,0.1); bottom: -80px; left: -80px; animation-delay: -4s; }
+    @keyframes drift { from { transform: translate(0,0); } to { transform: translate(30px, -30px); } }
+
+    .hero-content {
+      position: relative; text-align: center;
+      padding: 0 24px;
+      animation: fadeUp 1.2s ease both;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+
+    .hero-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .hero-tag::before, .hero-tag::after {
+      content: ''; display: block; height: 1px; width: 40px;
+      background: var(--gold); opacity: 0.6;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 9vw, 7rem);
+      line-height: 0.95;
+      background: linear-gradient(135deg, #f2d2d8 0%, #d4a24c 50%, #c8687a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .hero-desc {
+      max-width: 560px; margin: 0 auto 44px;
+      font-size: 1.1rem; line-height: 1.8;
+      color: rgba(253,245,240,0.7);
+      font-weight: 300;
+    }
+    .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 14px 36px;
+      background: linear-gradient(135deg, var(--rose), #a04555);
+      color: #fff; border: none; cursor: pointer;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(200,104,122,0.4); }
+    .btn-outline {
+      padding: 14px 36px;
+      background: transparent;
+      color: var(--gold); border: 1px solid rgba(212,162,76,0.5);
+      cursor: pointer;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: rgba(212,162,76,0.1); border-color: var(--gold); }
+
+    /* ── SERVICES ── */
+    #services {
+      padding: 120px 40px;
+      background: var(--warm);
+      position: relative;
+    }
+    #services::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--rose), transparent);
+    }
+    .section-header { text-align: center; margin-bottom: 72px; }
+    .section-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px; display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--cream);
+    }
+    .section-title em { color: var(--rose); font-style: italic; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .service-card {
+      background: rgba(253,245,240,0.03);
+      padding: 52px 40px;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+      border: 1px solid rgba(200,104,122,0.08);
+    }
+    .service-card:hover { background: rgba(200,104,122,0.07); }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(to right, var(--rose), var(--gold));
+      transition: width 0.4s ease;
+    }
+    .service-card:hover::after { width: 100%; }
+    .service-icon {
+      font-size: 2.4rem; margin-bottom: 24px; display: block;
+      filter: drop-shadow(0 0 12px rgba(212,162,76,0.5));
+    }
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: var(--cream);
+      margin-bottom: 14px;
+    }
+    .service-desc {
+      font-size: 0.95rem; line-height: 1.75;
+      color: rgba(253,245,240,0.55);
+      font-weight: 300;
+    }
+    .service-price {
+      margin-top: 24px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.2em;
+      color: var(--gold); text-transform: uppercase;
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      padding: 120px 40px;
+      background: var(--deep);
+    }
+    .gallery-intro { text-align: center; margin-bottom: 60px; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 6px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .gallery-item {
+      overflow: hidden; position: relative;
+      cursor: pointer;
+      background: var(--warm);
+    }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(5) { grid-column: span 2; }
+
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease, filter 0.4s ease;
+      filter: brightness(0.9);
+      min-height: 200px;
+    }
+    .gallery-item:hover img { transform: scale(1.06); filter: brightness(1); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,10,14,0.7) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end;
+      padding: 24px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      padding: 120px 40px;
+      background: var(--warm);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -12px; z-index: 0;
+      border: 1px solid rgba(212,162,76,0.3);
+    }
+    .about-img-wrap img {
+      width: 100%; display: block;
+      position: relative; z-index: 1;
+      filter: saturate(0.85) contrast(1.05);
+    }
+    .about-badge {
+      position: absolute; bottom: -20px; right: -20px; z-index: 2;
+      background: linear-gradient(135deg, var(--rose), #a04555);
+      padding: 20px 28px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem; color: #fff;
+      text-align: center;
+    }
+    .about-badge strong { display: block; font-style: normal; font-size: 1.6rem; }
+
+    .about-text .section-tag { text-align: left; }
+    .about-text .section-title { text-align: left; margin-bottom: 28px; }
+    .about-text p {
+      font-size: 1.05rem; line-height: 1.85;
+      color: rgba(253,245,240,0.65);
+      font-weight: 300; margin-bottom: 20px;
+    }
+    .about-features {
+      margin-top: 36px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .feature-line {
+      display: flex; align-items: center; gap: 14px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blush);
+    }
+    .feature-line::before {
+      content: ''; flex-shrink: 0;
+      width: 28px; height: 1px; background: var(--rose);
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials {
+      padding: 120px 40px;
+      background: var(--deep);
+      position: relative; overflow: hidden;
+    }
+    #testimonials::before {
+      content: '"';
+      position: absolute; top: 40px; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 20rem; color: rgba(200,104,122,0.04);
+      line-height: 1; pointer-events: none;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px; max-width: 1000px; margin: 0 auto;
+    }
+    .testimonial {
+      padding: 44px 36px;
+      border: 1px solid rgba(200,104,122,0.12);
+      position: relative;
+      background: rgba(45,18,24,0.4);
+    }
+    .testimonial::before {
+      content: '✦';
+      position: absolute; top: -12px; left: 32px;
+      background: var(--deep);
+      padding: 0 8px;
+      color: var(--gold); font-size: 1rem;
+    }
+    .testimonial-text {
+      font-size: 1.05rem; line-height: 1.8;
+      color: rgba(253,245,240,0.7);
+      font-style: italic; margin-bottom: 28px;
+    }
+    .testimonial-author {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .stars { color: var(--rose); margin-bottom: 18px; letter-spacing: 3px; }
+
+    /* ── BOOKING / CONTACT ── */
+    #contact {
+      padding: 120px 40px;
+      background: var(--warm);
+      text-align: center;
+      position: relative;
+    }
+    .contact-inner {
+      max-width: 680px; margin: 0 auto;
+    }
+    .contact-inner p {
+      font-size: 1.1rem; line-height: 1.8;
+      color: rgba(253,245,240,0.6);
+      font-weight: 300; margin-bottom: 52px;
+    }
+    .contact-cards {
+      display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 52px;
+    }
+    .contact-card {
+      flex: 1; min-width: 220px;
+      padding: 32px 28px;
+      border: 1px solid rgba(212,162,76,0.2);
+      background: rgba(253,245,240,0.03);
+      transition: background 0.3s;
+    }
+    .contact-card:hover { background: rgba(212,162,76,0.06); }
+    .contact-card-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
+    .contact-card-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px; display: block;
+    }
+    .contact-card-value {
+      font-size: 1.05rem; color: var(--cream);
+    }
+    .contact-card-value a { color: inherit; text-decoration: none; }
+    .contact-card-value a:hover { color: var(--gold); }
+
+    .occasions {
+      margin: 60px auto 0;
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    }
+    .occasion-pill {
+      padding: 8px 20px;
+      border: 1px solid rgba(200,104,122,0.3);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(253,245,240,0.5);
+      transition: all 0.2s;
+    }
+    .occasion-pill:hover { border-color: var(--rose); color: var(--blush); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px 40px;
+      background: #0e0507;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+      border-top: 1px solid rgba(200,104,122,0.1);
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--gold);
+    }
+    .footer-copy {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.15em;
+      color: rgba(253,245,240,0.3); text-transform: uppercase;
+    }
+    .footer-socials {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .footer-socials a { color: var(--rose); text-decoration: none; }
+    .footer-socials a:hover { color: var(--gold); }
+
+    /* ── DIVIDER ORNAMENT ── */
+    .ornament {
+      text-align: center; padding: 20px 0;
+      color: rgba(212,162,76,0.4);
+      font-size: 1.2rem; letter-spacing: 16px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      #about { grid-template-columns: 1fr; gap: 50px; padding: 80px 24px; }
+      .about-badge { bottom: -16px; right: 0; }
+      #services, #gallery, #testimonials, #contact { padding: 80px 24px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .gallery-item:nth-child(5) { grid-column: span 2; }
+      footer { flex-direction: column; text-align: center; padding: 36px 24px; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Shaloe's Beauty Sunset</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="floating-orb orb1"></div>
+  <div class="floating-orb orb2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Beauty · Nails · Lashes · Makeup</div>
+    <h1>Shaloe's<br>Beauty<br>Sunset</h1>
+    <p class="hero-sub">Glow. Slay. Turn Heads.</p>
+    <p class="hero-desc">Your beauty destination for stunning nails, flawless lash installations, and gorgeous professional makeup — tailored to make you feel radiant.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn-primary">Book an Appointment</a>
+      <a href="#gallery" class="btn-outline">View Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header reveal">
+    <span class="section-tag">What We Offer</span>
+    <h2 class="section-title">Services That Make You <em>Shine</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">💅</span>
+      <h3 class="service-name">Nail Art & Design</h3>
+      <p class="service-desc">From elegant classics to bold statement sets — gel, acrylic, intricate nail art, and custom designs that express your unique style.</p>
+      <p class="service-price">Custom Designs Available</p>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">✨</span>
+      <h3 class="service-name">Lash Installations</h3>
+      <p class="service-desc">Beautiful lash extensions and installations that enhance your natural look, giving you that effortless glamour every day.</p>
+      <p class="service-price">Natural to Full Glam</p>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-icon">💄</span>
+      <h3 class="service-name">Professional Makeup</h3>
+      <p class="service-desc">From soft day looks to full glam for any occasion — our professional makeup leaves you feeling confident, radiant, and photo-ready.</p>
+      <p class="service-price">All Skin Tones Welcome</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-intro reveal">
+    <span class="section-tag">Our Portfolio</span>
+    <h2 class="section-title">Work That <em>Speaks</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal">
+      <img src="/mnt/user-data/uploads/1000102207.jpg" alt="Nail art - pink with flowers" />
+      <div class="gallery-overlay"><span class="gallery-label">Floral Nail Art</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <img src="/mnt/user-data/uploads/1000102204.jpg" alt="Nail art - mint and pink" />
+      <div class="gallery-overlay"><span class="gallery-label">Mint & Gold Tips</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <img src="/mnt/user-data/uploads/1000102198.jpg" alt="Nail art - pink and lavender" />
+      <div class="gallery-overlay"><span class="gallery-label">Lavender French</span></div>
+    </div>
+    <div class="gallery-item reveal">
+      <img src="/mnt/user-data/uploads/1000102241.jpg" alt="Red french tip nails" />
+      <div class="gallery-overlay"><span class="gallery-label">Red French Tips</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <img src="/mnt/user-data/uploads/1000102244.jpg" alt="Yellow cherry nails" />
+      <div class="gallery-overlay"><span class="gallery-label">Cherry Summer Set</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <img src="/mnt/user-data/uploads/1000102242.jpg" alt="Lash closeup" />
+      <div class="gallery-overlay"><span class="gallery-label">Lash Installation</span></div>
+    </div>
+    <div class="gallery-item reveal">
+      <img src="/mnt/user-data/uploads/1000102243.jpg" alt="Lash and brow" />
+      <div class="gallery-overlay"><span class="gallery-label">Lash & Brow</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div style="background: var(--warm);">
+  <section id="about">
+    <div class="about-img-wrap reveal">
+      <img src="/mnt/user-data/uploads/1000102256.jpg" alt="Shaloe - Beauty Artist" />
+      <div class="about-badge">
+        <strong>Shaloe</strong>
+        Beauty Artist
+      </div>
+    </div>
+    <div class="about-text reveal reveal-delay-1">
+      <span class="section-tag">About Us</span>
+      <h2 class="section-title">Beauty Is Our <em>Passion</em></h2>
+      <p>At Shaloe's Beauty Sunset, we believe every woman deserves to feel stunning, confident, and radiant. Whether it's your wedding day, a birthday, graduation, date night, or just because — we're here to make it happen.</p>
+      <p>From intricate nail designs to breathtaking lash transformations and flawless makeup looks, every service is crafted with care, skill, and an eye for beauty.</p>
+      <div class="about-features">
+        <div class="feature-line">Certified & Experienced Beauty Artist</div>
+        <div class="feature-line">Premium Quality Products</div>
+        <div class="feature-line">All Skin Tones & Styles Welcomed</div>
+        <div class="feature-line">Personalized Consultations</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header reveal">
+    <span class="section-tag">Client Love</span>
+    <h2 class="section-title">What Our Clients <em>Say</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial reveal">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"My nails looked absolutely incredible for my wedding day. Shaloe understood exactly what I wanted and delivered beyond my expectations!"</p>
+      <span class="testimonial-author">— Tendai M.</span>
+    </div>
+    <div class="testimonial reveal reveal-delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"The lash installation was flawless and so natural-looking. I've never felt so confident. I won't go anywhere else!"</p>
+      <span class="testimonial-author">— Precious K.</span>
+    </div>
+    <div class="testimonial reveal reveal-delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">"Shaloe's makeup transformed me for my graduation photos. Everyone kept asking who did my makeup. Highly recommend!"</p>
+      <span class="testimonial-author">— Rudo N.</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / BOOKING -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <span class="section-tag">Get in Touch</span>
+      <h2 class="section-title">Book Your <em>Appointment</em></h2>
+    </div>
+    <p class="reveal reveal-delay-1">Ready to glow? Reach out via call, WhatsApp, or email and let's bring your beauty vision to life. We'd love to hear from you!</p>
+    <div class="contact-cards">
+      <div class="contact-card reveal">
+        <span class="contact-card-icon">📞</span>
+        <span class="contact-card-label">Call or WhatsApp</span>
+        <span class="contact-card-value">
+          <a href="tel:+263776627899">077 662 7899</a>
+        </span>
+      </div>
+      <div class="contact-card reveal reveal-delay-1">
+        <span class="contact-card-icon">📧</span>
+        <span class="contact-card-label">Email Us</span>
+        <span class="contact-card-value">
+          <a href="mailto:margaretnaeshalom@gmail.com">margaretnaeshalom@gmail.com</a>
+        </span>
+      </div>
+    </div>
+    <a href="https://wa.me/263776627899" class="btn-primary">WhatsApp Us Now</a>
+
+    <div class="ornament">✦ ✦ ✦</div>
+    <p style="font-family:'Josefin Sans',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:20px;">We cater for</p>
+    <div class="occasions reveal">
+      <span class="occasion-pill">Birthdays</span>
+      <span class="occasion-pill">Weddings</span>
+      <span class="occasion-pill">Graduations</span>
+      <span class="occasion-pill">Date Nights</span>
+      <span class="occasion-pill">Photoshoots</span>
+      <span class="occasion-pill">Self-Care Days</span>
+      <span class="occasion-pill">Matric Farewells</span>
+      <span class="occasion-pill">Any Occasion</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Shaloe's Beauty Sunset</div>
+  <div class="footer-copy">© 2026 Shaloe's Beauty Sunset · All Rights Reserved</div>
+  <div class="footer-socials">TikTok: <a href="https://www.tiktok.com/@margaretnaeshalom" target="_blank">@margaretnaeshalom</a></div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
