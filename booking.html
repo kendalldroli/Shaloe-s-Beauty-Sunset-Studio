@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a project — Brandcraft Droli Web Designs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#101820;
+    --bg-alt:#172230;
+    --card:#182530;
+    --accent:#E8A33D;
+    --accent-soft:#3A2E18;
+    --text:#F2EFE9;
+    --text-muted:#93A1AD;
+    --border:#28323C;
+    --error:#E0694F;
+    --radius:4px;
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#101820;
+      --bg-alt:#172230;
+      --card:#182530;
+      --text:#F2EFE9;
+      --text-muted:#93A1AD;
+      --border:#28323C;
+    }
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Grotesk', -apple-system, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+    padding:64px 28px 80px;
+  }
+  .mark{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.02em;
+    color:var(--accent);
+    margin-bottom:56px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:56px;
+    align-items:start;
+  }
+  @media (max-width:760px){
+    .grid{grid-template-columns:1fr; gap:40px;}
+    .wrap{padding:40px 20px 60px;}
+  }
+  h1{
+    font-size:clamp(34px, 5vw, 50px);
+    font-weight:600;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    max-width:11ch;
+  }
+  .lede{
+    margin-top:20px;
+    color:var(--text-muted);
+    font-size:16px;
+    max-width:36ch;
+  }
+  .facts{
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .fact{
+    display:flex;
+    gap:14px;
+    align-items:baseline;
+    padding-bottom:14px;
+    border-bottom:1px solid var(--border);
+    font-size:14px;
+    color:var(--text-muted);
+  }
+  .fact b{
+    color:var(--text);
+    font-weight:500;
+    min-width:120px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:32px;
+  }
+  .card h2{
+    font-size:19px;
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .card p.sub{
+    color:var(--text-muted);
+    font-size:14px;
+    margin-bottom:28px;
+  }
+  label{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--text-muted);
+    margin-bottom:7px;
+    margin-top:20px;
+  }
+  label:first-of-type{margin-top:0;}
+  input, select, textarea{
+    width:100%;
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    color:var(--text);
+    font-family:'Space Grotesk', sans-serif;
+    font-size:15px;
+    padding:11px 12px;
+    outline:none;
+    transition:border-color 0.15s;
+  }
+  input:focus, select:focus, textarea:focus{
+    border-color:var(--accent);
+  }
+  textarea{resize:vertical; min-height:84px;}
+  select{appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2393A1AD' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; padding-right:32px;}
+  .field-error{
+    display:none;
+    color:var(--error);
+    font-size:12.5px;
+    margin-top:6px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .invalid .field-error{display:block;}
+  .invalid input, .invalid textarea, .invalid select{border-color:var(--error);}
+  button{
+    margin-top:28px;
+    width:100%;
+    background:var(--accent);
+    color:#191008;
+    border:none;
+    border-radius:var(--radius);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    font-weight:500;
+    letter-spacing:0.01em;
+    padding:14px 18px;
+    cursor:pointer;
+    transition:filter 0.15s, transform 0.1s;
+  }
+  button:hover{filter:brightness(1.08);}
+  button:active{transform:scale(0.99);}
+  .fineprint{
+    margin-top:16px;
+    font-size:12px;
+    color:var(--text-muted);
+    text-align:center;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    padding:5px 10px;
+    border-radius:var(--radius);
+    margin-bottom:18px;
+  }
+  .badge::before{
+    content:"";
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mark">Brandcraft Droli Web Designs</div>
+  <div class="grid">
+    <div>
+      <h1>Tell us what you're building.</h1>
+      <p class="lede">Fill in the brief and it lands straight in our WhatsApp — no account, no waiting on a contact form reply.</p>
+      <div class="facts">
+        <div class="fact"><b>Response time</b> Usually within a day</div>
+        <div class="fact"><b>Based in</b> Zimbabwe, working with clients anywhere</div>
+        <div class="fact"><b>Recent work</b> Shaloe's Beauty Sunset Showcase</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="badge">Opens WhatsApp</span>
+      <h2>Book a project</h2>
+      <p class="sub">This fills in a WhatsApp message for you to send — nothing is submitted until you hit send there.</p>
+
+      <form id="bookingForm" novalidate>
+        <div id="nameGroup">
+          <label for="name">Your name</label>
+          <input type="text" id="name" placeholder="e.g. Tendai Moyo">
+          <div class="field-error">Enter your name</div>
+        </div>
+
+        <div id="serviceGroup">
+          <label for="service">What do you need</label>
+          <select id="service">
+            <option value="">Choose one</option>
+            <option>New website</option>
+            <option>Redesign an existing site</option>
+            <option>E-commerce store</option>
+            <option>Landing page</option>
+            <option>Website maintenance</option>
+            <option>Something else</option>
+          </select>
+          <div class="field-error">Pick what you need</div>
+        </div>
+
+        <div id="dateGroup">
+          <label for="date">Preferred date to talk</label>
+          <input type="date" id="date">
+          <div class="field-error">Pick a date</div>
+        </div>
+
+        <div id="detailsGroup">
+          <label for="details">Brief details</label>
+          <textarea id="details" placeholder="What's the project, and when do you need it live?"></textarea>
+          <div class="field-error">Add a few details so we can prep</div>
+        </div>
+
+        <button type="submit">Send on WhatsApp</button>
+        <p class="fineprint">You'll be taken to WhatsApp with this pre-filled to Brandcraft Droli.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const WHATSAPP_NUMBER = "263783124716";
+
+  const form = document.getElementById('bookingForm');
+  const groups = {
+    name: document.getElementById('nameGroup'),
+    service: document.getElementById('serviceGroup'),
+    date: document.getElementById('dateGroup'),
+    details: document.getElementById('detailsGroup'),
+  };
+
+  function formatDate(iso){
+    if(!iso) return '';
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const service = document.getElementById('service').value;
+    const date = document.getElementById('date').value;
+    const details = document.getElementById('details').value.trim();
+
+    let valid = true;
+    [['name', name], ['service', service], ['date', date], ['details', details]].forEach(([key, val]) => {
+      if(!val){
+        groups[key].classList.add('invalid');
+        valid = false;
+      } else {
+        groups[key].classList.remove('invalid');
+      }
+    });
+
+    if(!valid) return;
+
+    const message =
+`Hi Brandcraft Droli Web Designs, I'd like to book a project.
+
+Name: ${name}
+Service: ${service}
+Preferred date to talk: ${formatDate(date)}
+Details: ${details}`;
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  });
+
+  ['name','service','date','details'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      groups[id].classList.remove('invalid');
+    });
+  });
+</script>
+</body>
+</html>
