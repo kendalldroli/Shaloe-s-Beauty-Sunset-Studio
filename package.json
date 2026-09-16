@@ -1,8 +1,0 @@
-{
-  "name": "shaloes-beauty-sunset-studio",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "build": "mkdir -p dist && cp shaloesbeautysunset-1.html dist/index.html"
-  }
-}
